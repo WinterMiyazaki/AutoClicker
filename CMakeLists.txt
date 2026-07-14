@@ -12,4 +12,6 @@ add_executable(AutoClicker main.cpp
         src/auto_clicker/clicker_manager.h
         src/loop/loop_manager.cpp
         src/loop/loop_manager.h
+        src/app/app_manager.cpp
+        src/app/app_manager.h
 )
