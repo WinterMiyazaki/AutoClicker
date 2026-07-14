@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+#include "src/auto_clicker/clicker_manager.h"
+
 void showDescriptions(const std::vector<std::string>& descriptions) {
     for (const auto& description : descriptions) {
         std::cout << description << std::endl;
@@ -14,5 +16,6 @@ int main() {
 
     const std::vector<std::string> descriptions = {"* F8 for ON/OFF AutoClicker", "* F9 for close"};
     showDescriptions(descriptions);
+    clicker_manager::click();
     return 0;
 }
