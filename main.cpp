@@ -3,6 +3,7 @@
 #include <windows.h>
 
 #include "src/app/app_manager.h"
+#include "src/auto_clicker/clicker_manager.h"
 #include "src/loop/loop_manager.h"
 
 void showDescriptions(const std::vector<std::string>& descriptions) {
@@ -11,7 +12,7 @@ void showDescriptions(const std::vector<std::string>& descriptions) {
     }
 }
 
-void drawText(const loop_manager& lpm) {
+void drawText(app_manager& am, const loop_manager& lpm) {
     system("cls");
 
     std::cout << "Welcome to AutoClicker!" << std::endl;
@@ -21,16 +22,26 @@ void drawText(const loop_manager& lpm) {
 
     const std::vector<std::string> descriptions = {"* F8 for ON/OFF AutoClicker", "* F9 for close"};
     showDescriptions(descriptions);
+
+    am.setNeedRedraw(false);
 }
 
 [[noreturn]] int main() {
     loop_manager lpm;
     app_manager am;
 
-    drawText(lpm);
+    drawText(am, lpm);
 
     while (true) {
+        if (lpm.getStatus()) {
+            clicker_manager::click();
+        }
+
         am.toggleClicker(lpm);
+
+        if (am.getNeedRedrawStatus()) {
+            drawText(am, lpm);
+        }
 
         if (GetAsyncKeyState(VK_F9) & 1) {
             am.quit();

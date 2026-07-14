@@ -11,7 +11,8 @@ class loop_manager;
 class app_manager {
 public:
     void toggleClicker(loop_manager& lpm);
-    void quit() const;
+    void quit() ;
+    void setNeedRedraw(bool need_redraw);
     [[nodiscard]] bool getNeedRedrawStatus() const;
 private:
     bool m_need_redraw = false;

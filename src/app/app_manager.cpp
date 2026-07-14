@@ -12,11 +12,16 @@
 void app_manager::toggleClicker(loop_manager& lpm) {
     if (GetAsyncKeyState(VK_F8) & 1) {
         lpm.setOn(!lpm.getStatus());
+        setNeedRedraw(true);
     }
 }
 
-void app_manager::quit() const {
+void app_manager::quit() {
     exit(0);
+}
+
+void app_manager::setNeedRedraw(const bool need_redraw) {
+    m_need_redraw = need_redraw;
 }
 
 bool app_manager::getNeedRedrawStatus() const {
